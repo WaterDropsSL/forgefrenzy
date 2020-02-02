@@ -9,15 +9,20 @@ public class Station : MonoBehaviour
     private GameObject item;
     private float processTimeLeft = 5.0f;
     private Sprite originalSprite;
+    private int currentProgress = 1;
 
     public float processTimer = 5.0f;
     public Sprite hintSprite;
     public GameObject storageArea;
     public GameObject conveyorBelt;
     public AudioClip processingSound;
-    public Transform progressBarLocation;
-    public Sprite progressBar;
+    public GameObject progressBar;
+    public Sprite[] progressBarSprites;
+    public GameObject scoreManager;
 
+    void Start() {
+        progressBar.GetComponent<SpriteRenderer>().enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,7 +37,12 @@ public class Station : MonoBehaviour
                 resetProgressBar();
             }
             else {
-                updateProgressBar();
+                int newProgress = Mathf.FloorToInt((1 - processTimeLeft / processTimer) / 0.25f);
+                if (newProgress > currentProgress) {
+                    print("newProgress: " + newProgress);
+                    updateProgressBar(newProgress);
+                }
+                
             }
 
             processTimeLeft -= Time.deltaTime;
@@ -51,7 +61,8 @@ public class Station : MonoBehaviour
             //{
             isBlocked = true;
             AudioSource.PlayClipAtPoint(processingSound, transform.position);
-            updateProgressBar();
+            updateProgressBar(0);
+            progressBar.GetComponent<SpriteRenderer>().enabled = true;
             // play animation
             Debug.Log("Received item: " + item.name);
             item.GetComponent<Item>().nextStation(); // update status
@@ -67,8 +78,10 @@ public class Station : MonoBehaviour
 
         if (item.GetComponent<Item>().isRepaired())  // send to conveyor belt if item has been repaired
         {
-            print("Item " + item.name + " has been repaired!");
+            int scorePoints = item.GetComponent<Item>().scorePoints;
+            print("Item " + item.name + " has been repaired, got " + scorePoints + " points.");
             item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
+            scoreManager.GetComponent<ScoreManager>().addScore(scorePoints);
             conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
         }
         else {
@@ -99,11 +112,15 @@ public class Station : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = originalSprite;
     }
 
-    private void updateProgressBar() {
-        
+    private void updateProgressBar(int progress) {
+        print("progress is: " + progress);
+        progressBar.GetComponent<SpriteRenderer>().sprite = progressBarSprites[progress];
+        currentProgress = progress;
     }
 
     private void resetProgressBar() {
         //progressBar.
+        progressBar.GetComponent<SpriteRenderer>().enabled = false;
+        updateProgressBar(1);
     }
 }

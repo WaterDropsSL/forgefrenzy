@@ -1,15 +1,16 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrowbarItem : Item
+public class BusterSwordItem : Item
 {
-    public CrowbarItem()
+    public BusterSwordItem()
     {
-        this.stationsLeft.Enqueue("Forge");
-        this.stationsLeft.Enqueue("Anvil");
+        this.stationsLeft.Enqueue("Welding");
         this.stationsLeft.Enqueue("Forge");
         this.stationsLeft.Enqueue("Barrel");
     }
 
 }
+
