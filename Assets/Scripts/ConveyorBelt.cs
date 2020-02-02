@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ConveyorBelt : ItemHolder
 {
-    //public Vector3 spawnPosition;
-    //public List<Weapon> weapons = new List<Weapon>();
+    public float flowRate = 1.0f;
 
-    //public void insertWeapon(GameObject weapon) {
-    //    print("Weapon received at the conveyor belt.");
-    //    weapons.Add(weapon);
-    //    weapon.GetComponent<Weapon>().setLocation(gameObject);
-    //}
+    void Update()
+    {
 
-    //public void removeWeapon(GameObject weapon) {
-    //    weapons.Remove(weapon);
-    //}
+        foreach (GameObject item in items)
+        {
+            float distance = Time.deltaTime * flowRate;
+            item.transform.Translate(Vector3.right * distance);
+            //item.transform.position = item.transform.position + Vector3(1, 0, 0);
+        }
+    }
 }

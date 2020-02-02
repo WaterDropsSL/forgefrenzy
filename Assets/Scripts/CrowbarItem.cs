@@ -12,10 +12,5 @@ public class CrowbarItem : Item
         this.stationsLeft.Enqueue("Barrel");
         //this.currentStation = "Forge";
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 }

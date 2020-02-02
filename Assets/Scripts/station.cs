@@ -49,14 +49,25 @@ public class Station : MonoBehaviour
     }
 
     void emptyStation() {
-        if (!storageArea.GetComponent<StorageArea>().isFull())
+
+        if (item.GetComponent<Item>().isRepaired())  // send to conveyor belt if item has been repaired
         {
-            storageArea.GetComponent<StorageArea>().insert(item);
-        }
-        else {
-            print("Storage full. Sending to conveyor belt");
+            print("Item " + item.name + " has been repaired!");
+            item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
             conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
         }
+        else {
+            if (!storageArea.GetComponent<StorageArea>().isFull())
+            {
+                storageArea.GetComponent<StorageArea>().insert(item);
+            }
+            else
+            {
+                print("Storage full.");
+                conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
+            }
+        }
+        
         isBlocked = false;
     }
 
