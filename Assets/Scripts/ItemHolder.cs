@@ -8,7 +8,7 @@ public class ItemHolder : MonoBehaviour
     public List<GameObject> items = new List<GameObject>();
     public int maxItems = 2;
 
-    public void insert(GameObject item) {
+    public virtual void insert(GameObject item) {
         print("Item received at the " + gameObject.name);
         items.Add(item);
         item.GetComponent<Item>().setLocation(gameObject);

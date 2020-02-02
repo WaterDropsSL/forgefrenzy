@@ -8,9 +8,13 @@ public class Station : MonoBehaviour
     private bool isProcessing = false;
     private GameObject item;
     public float processTimer = 5.0f;
+    public Sprite hintSprite;
     private float processTimeLeft = 5.0f;
     public GameObject storageArea;
     public GameObject conveyorBelt;
+    public AudioClip processingSound;
+
+    private Sprite originalSprite;
 
     // Update is called once per frame
     void Update()
@@ -37,6 +41,7 @@ public class Station : MonoBehaviour
             //if (weaponTag == gameObject.name)
             //{
             isBlocked = true;
+            AudioSource.PlayClipAtPoint(processingSound, transform.position);
             // play animation
             Debug.Log("Received item: " + item.name);
             item.GetComponent<Item>().nextStation(); // update status
@@ -71,8 +76,16 @@ public class Station : MonoBehaviour
         isBlocked = false;
     }
 
-
     public bool isAvailable() {
         return !isBlocked;
+    }
+
+    public void hint() {
+        originalSprite = GetComponent<SpriteRenderer>().sprite;
+        GetComponent<SpriteRenderer>().sprite = hintSprite;
+    }
+
+    public void restoreSprite() {
+        GetComponent<SpriteRenderer>().sprite = originalSprite;
     }
 }

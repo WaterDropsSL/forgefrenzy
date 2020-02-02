@@ -30,8 +30,15 @@ class ItemDragHandler : MonoBehaviour
             distance = Vector3.Distance(transform.position, Camera.main.transform.position);
             initialPosition = transform.position;
             dragging = true;
+
+            GameObject station = getNextStation();
+            station.GetComponent<Station>().hint();
         }
 
+    }
+
+    private GameObject getNextStation() {
+        return GameObject.Find(gameObject.GetComponent<Item>().getNextStation());
     }
 
     void OnMouseUp()
@@ -40,7 +47,8 @@ class ItemDragHandler : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        GameObject station = getNextStation();
+        station.GetComponent<Station>().restoreSprite();
         if (Physics.Raycast(ray, out hit, 100))
         {
             if (hit.transform.tag == "Station")  // check if object we are hovering over is a station

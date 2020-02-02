@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73117246fcdfedf40949b23750ba9bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 2
+  timer: 120
 --- !u!1 &734344860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 719062362999315139, guid: b49c567e84e0445449c166fb46f065dc,
@@ -793,6 +793,22 @@ PrefabInstance:
       propertyPath: conveyorBelt
       value: 
       objectReference: {fileID: 1971531332}
+    - target: {fileID: 7761758590316062125, guid: 8294a9efc5667ea4ab46d447fa54c776,
+        type: 3}
+      propertyPath: processingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f56e2f627ddeb86428f9ad1124d98d0c, type: 3}
+    - target: {fileID: 7761758590316062125, guid: 8294a9efc5667ea4ab46d447fa54c776,
+        type: 3}
+      propertyPath: processTimer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761758590316062125, guid: 8294a9efc5667ea4ab46d447fa54c776,
+        type: 3}
+      propertyPath: hintSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a149bfea6e00d14d860808897701e3d,
+        type: 3}
     - target: {fileID: 2100925042277723854, guid: 8294a9efc5667ea4ab46d447fa54c776,
         type: 3}
       propertyPath: m_Sprite
@@ -889,6 +905,22 @@ PrefabInstance:
       propertyPath: conveyorBelt
       value: 
       objectReference: {fileID: 1971531332}
+    - target: {fileID: 3704981008039289967, guid: 17f3303aae04982488196237c8d46e6f,
+        type: 3}
+      propertyPath: processingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f383f7a45e49aa348a1e3140534be7f3, type: 3}
+    - target: {fileID: 3704981008039289967, guid: 17f3303aae04982488196237c8d46e6f,
+        type: 3}
+      propertyPath: processTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704981008039289967, guid: 17f3303aae04982488196237c8d46e6f,
+        type: 3}
+      propertyPath: hintSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 897e2d7a89a547442aa2c8b4328fcb53,
+        type: 3}
     - target: {fileID: 3704981008039289961, guid: 17f3303aae04982488196237c8d46e6f,
         type: 3}
       propertyPath: m_Sprite
@@ -1071,8 +1103,19 @@ PrefabInstance:
     - target: {fileID: 8648911308371065080, guid: e1a9bf735fa03f94eb404841f1f5ae23,
         type: 3}
       propertyPath: processTimer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8648911308371065080, guid: e1a9bf735fa03f94eb404841f1f5ae23,
+        type: 3}
+      propertyPath: processingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 078af572dc9d488409741a9fcc004a50, type: 3}
+    - target: {fileID: 8648911308371065080, guid: e1a9bf735fa03f94eb404841f1f5ae23,
+        type: 3}
+      propertyPath: hintSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06a18e333535d7f458c3ead8639f47bf,
+        type: 3}
     - target: {fileID: 8648911308371065083, guid: e1a9bf735fa03f94eb404841f1f5ae23,
         type: 3}
       propertyPath: m_Sprite
