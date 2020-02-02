@@ -28,6 +28,7 @@ public class ItemSpawner : MonoBehaviour
         {
             spawnItem(nextItem);
             timer = timer - spawnTime;
+            processNextItem();
         }
     }
 
