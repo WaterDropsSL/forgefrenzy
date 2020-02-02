@@ -17,8 +17,8 @@ public class Station : MonoBehaviour
     public GameObject conveyorBelt;
     public AudioClip processingSound;
     public GameObject progressBar;
-    //public Transform progressBarLocation;
     public Sprite[] progressBarSprites;
+    public GameObject scoreManager;
 
     void Start() {
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
@@ -78,8 +78,10 @@ public class Station : MonoBehaviour
 
         if (item.GetComponent<Item>().isRepaired())  // send to conveyor belt if item has been repaired
         {
-            print("Item " + item.name + " has been repaired!");
+            int scorePoints = item.GetComponent<Item>().scorePoints;
+            print("Item " + item.name + " has been repaired, got " + scorePoints + " points.");
             item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
+            scoreManager.GetComponent<ScoreManager>().addScore(scorePoints);
             conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
         }
         else {

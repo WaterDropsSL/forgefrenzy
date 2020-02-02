@@ -82,6 +82,7 @@ MonoBehaviour:
     type: 3}
   repairedSprite: {fileID: 21300000, guid: 691ec1baf17aa634db6bc02e9c37c25c, type: 3}
   repairedSound: {fileID: 8300000, guid: 522463134ef75c548b80c73bdede0e43, type: 3}
+  scorePoints: 4
 --- !u!1001 &1395939924923165717
 PrefabInstance:
   m_ObjectHideFlags: 0

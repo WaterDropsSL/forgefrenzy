@@ -120,6 +120,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &229953995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229953997}
+  - component: {fileID: 229953996}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &229953996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229953995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f2fcc86f63ef5469cce7979887a088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &229953997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229953995}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1328801, y: -0.32103443, z: -3.2333605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &271009879
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73117246fcdfedf40949b23750ba9bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 120
+  timer: 40
+  scoreManager: {fileID: 229953995}
 --- !u!1 &734344860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 719062362999315139, guid: b49c567e84e0445449c166fb46f065dc,
@@ -770,6 +814,11 @@ PrefabInstance:
       propertyPath: conveyorBelt
       value: 
       objectReference: {fileID: 777357357}
+    - target: {fileID: 2911102840519970752, guid: 3225fe5af88264d4084c8804aa4aebbd,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 229953995}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3225fe5af88264d4084c8804aa4aebbd, type: 3}
 --- !u!4 &3517496491060188128 stripped
@@ -944,6 +993,11 @@ PrefabInstance:
       propertyPath: conveyorBelt
       value: 
       objectReference: {fileID: 777357357}
+    - target: {fileID: 8817340464744503896, guid: 17f3303aae04982488196237c8d46e6f,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 229953995}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17f3303aae04982488196237c8d46e6f, type: 3}
 --- !u!1001 &6894530952371840352
@@ -1038,6 +1092,11 @@ PrefabInstance:
       propertyPath: conveyorBelt
       value: 
       objectReference: {fileID: 777357357}
+    - target: {fileID: 3970191347322164725, guid: 8294a9efc5667ea4ab46d447fa54c776,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 229953995}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8294a9efc5667ea4ab46d447fa54c776, type: 3}
 --- !u!1001 &7263644187013490748
@@ -1274,5 +1333,10 @@ PrefabInstance:
       propertyPath: processingSound
       value: 
       objectReference: {fileID: 8300000, guid: b76c05358b942f34383f17c6b728ccdc, type: 3}
+    - target: {fileID: 2791174766883171286, guid: e1a9bf735fa03f94eb404841f1f5ae23,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 229953995}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1a9bf735fa03f94eb404841f1f5ae23, type: 3}

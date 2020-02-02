@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     public Sprite brokenSelectedSprite;
     public Sprite repairedSprite;
     public AudioClip repairedSound;
+    public int scorePoints;
     //public GameObject spawnObject;
 
     public Item() {

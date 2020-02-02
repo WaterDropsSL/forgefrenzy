@@ -129,3 +129,4 @@ MonoBehaviour:
     type: 3}
   repairedSprite: {fileID: 21300000, guid: a7d6bdaa83c333445b4ed512bc90cc1c, type: 3}
   repairedSound: {fileID: 8300000, guid: 522463134ef75c548b80c73bdede0e43, type: 3}
+  scorePoints: 3
