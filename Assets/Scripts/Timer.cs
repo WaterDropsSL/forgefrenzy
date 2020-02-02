@@ -19,6 +19,6 @@ public class Timer : MonoBehaviour {
         int score = scoreManager.GetComponent<ScoreManager>().getScore();
         print("FINAL SCORE: " + score);
         PlayerPrefs.SetInt("finalScore", score);
-        SceneManager.LoadScene("GameOverScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 } 

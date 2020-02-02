@@ -12,6 +12,7 @@ public class Item : MonoBehaviour
     public Sprite repairedSprite;
     public AudioClip repairedSound;
     public int scorePoints;
+    private bool hidden = false;
     //public GameObject spawnObject;
 
     public Item() {
@@ -46,10 +47,26 @@ public class Item : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 
+    public void hideItem() {
+        hidden = true;
+        GetComponent<SpriteRenderer>().enabled = false;
+        print("item invisible");
+    }
+
+    public void unHideItem()
+    {
+        hidden = false;
+        GetComponent<SpriteRenderer>().enabled = true;
+        print("item visible");
+    }
+
     void OnBecameInvisible()
     {
-        location.GetComponent<ItemHolder>().remove(gameObject);
-        print("Destroying object...");
-        Destroy(gameObject);
+        if (!hidden) {
+            location.GetComponent<ItemHolder>().remove(gameObject);
+            print("Destroying object...");
+            Destroy(gameObject);
+        }
+        
     }
 }

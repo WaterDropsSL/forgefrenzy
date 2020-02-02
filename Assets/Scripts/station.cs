@@ -19,9 +19,15 @@ public class Station : MonoBehaviour
     public GameObject progressBar;
     public Sprite[] progressBarSprites;
     public GameObject scoreManager;
+    public Sprite[] capacityBarSprites;
+    public GameObject capacityBar;
+    public bool capacityBarEnabled = false;
 
     void Start() {
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
+        if (!capacityBarEnabled) {
+            capacityBar.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -33,6 +39,7 @@ public class Station : MonoBehaviour
                 // process done
                 isProcessing = false;
                 print("Item finished!");
+
                 emptyStation();
                 resetProgressBar();
             }
@@ -65,6 +72,7 @@ public class Station : MonoBehaviour
             progressBar.GetComponent<SpriteRenderer>().enabled = true;
             // play animation
             Debug.Log("Received item: " + item.name);
+            item.GetComponent<Item>().hideItem();
             item.GetComponent<Item>().nextStation(); // update status
             this.item = item;
             isProcessing = true;
@@ -76,6 +84,7 @@ public class Station : MonoBehaviour
 
     void emptyStation() {
 
+        
         if (item.GetComponent<Item>().isRepaired())  // send to conveyor belt if item has been repaired
         {
             int scorePoints = item.GetComponent<Item>().scorePoints;
@@ -83,6 +92,7 @@ public class Station : MonoBehaviour
             item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
             scoreManager.GetComponent<ScoreManager>().addScore(scorePoints);
             conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
+            AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position); 
         }
         else {
             if (!storageArea.GetComponent<StorageArea>().isFull())
@@ -95,7 +105,7 @@ public class Station : MonoBehaviour
                 conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
             }
         }
-        
+        item.GetComponent<Item>().unHideItem();
         isBlocked = false;
     }
 
