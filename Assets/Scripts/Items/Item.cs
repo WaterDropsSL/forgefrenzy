@@ -43,4 +43,11 @@ public class Item : MonoBehaviour
     public void setSprite(Sprite newSprite) {
         GetComponent<SpriteRenderer>().sprite = newSprite;
     }
+
+    void OnBecameInvisible()
+    {
+        location.GetComponent<ItemHolder>().remove(gameObject);
+        print("Destroying object...");
+        Destroy(gameObject);
+    }
 }

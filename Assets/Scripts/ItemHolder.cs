@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour
 {
-    public Vector3 spawnPosition;
-    public List<GameObject> items;
+    public Transform spawnPosition;
+    public List<GameObject> items = new List<GameObject>();
     public int maxItems = 2;
 
     public void insert(GameObject item) {
@@ -14,8 +14,7 @@ public class ItemHolder : MonoBehaviour
         item.GetComponent<Item>().setLocation(gameObject);
 
         // move position
-        Vector3 newItemPosition = transform.position + Vector3.up;
-        item.transform.position = newItemPosition;
+        item.transform.position = spawnPosition.position;
     }
 
     public void remove(GameObject item)
