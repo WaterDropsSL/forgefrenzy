@@ -7,25 +7,34 @@ public class Station : MonoBehaviour
     private bool isBlocked = false;
     private bool isProcessing = false;
     private GameObject item;
+    private float processTimeLeft = 5.0f;
+    private Sprite originalSprite;
+
     public float processTimer = 5.0f;
     public Sprite hintSprite;
-    private float processTimeLeft = 5.0f;
     public GameObject storageArea;
     public GameObject conveyorBelt;
     public AudioClip processingSound;
+    public Transform progressBarLocation;
+    public Sprite progressBar;
 
-    private Sprite originalSprite;
 
     // Update is called once per frame
     void Update()
     {
         if (isProcessing) {
-            if (processTimeLeft < 0) {
+            if (processTimeLeft < 0)
+            {
                 // process done
-                isProcessing = false;           
+                isProcessing = false;
                 print("Item finished!");
                 emptyStation();
+                resetProgressBar();
             }
+            else {
+                updateProgressBar();
+            }
+
             processTimeLeft -= Time.deltaTime;
             // print("Weapon will be ready in: " + processTimeLeft);
         }
@@ -42,6 +51,7 @@ public class Station : MonoBehaviour
             //{
             isBlocked = true;
             AudioSource.PlayClipAtPoint(processingSound, transform.position);
+            updateProgressBar();
             // play animation
             Debug.Log("Received item: " + item.name);
             item.GetComponent<Item>().nextStation(); // update status
@@ -87,5 +97,13 @@ public class Station : MonoBehaviour
 
     public void restoreSprite() {
         GetComponent<SpriteRenderer>().sprite = originalSprite;
+    }
+
+    private void updateProgressBar() {
+        
+    }
+
+    private void resetProgressBar() {
+        //progressBar.
     }
 }
