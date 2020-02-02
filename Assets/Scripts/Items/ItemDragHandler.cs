@@ -8,6 +8,8 @@ class ItemDragHandler : MonoBehaviour
     private float distance;
     private Vector3 initialPosition;
 
+    public AudioClip pickUpSound;
+    public AudioClip rejectSound;
 
     void OnMouseEnter()
     {
@@ -31,6 +33,7 @@ class ItemDragHandler : MonoBehaviour
             initialPosition = transform.position;
             dragging = true;
 
+            AudioSource.PlayClipAtPoint(pickUpSound, transform.position);
             GameObject station = getNextStation();
             station.GetComponent<Station>().hint();
         }
@@ -72,8 +75,8 @@ class ItemDragHandler : MonoBehaviour
                 }
             }
         }
-            
 
+        AudioSource.PlayClipAtPoint(rejectSound, transform.position);
         transform.position = initialPosition;
 
     }
