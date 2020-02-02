@@ -19,6 +19,13 @@ public class Timer : MonoBehaviour {
         int score = scoreManager.GetComponent<ScoreManager>().getScore();
         print("FINAL SCORE: " + score);
         PlayerPrefs.SetInt("finalScore", score);
+
+        int bestScore = PlayerPrefs.GetInt("bestScore");
+        if (score > bestScore) {
+            PlayerPrefs.SetInt("bestScore", score);
+        }
+
+        
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 } 

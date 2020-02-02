@@ -7,15 +7,19 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     public AudioClip playAudio;
-
+    //public AudioClip menuMusic;
     public Text countText;
+    public Text bestScoreText;
     public void Start()
     {
         int score = PlayerPrefs.GetInt("finalScore");
+        int bestScore = PlayerPrefs.GetInt("bestScore");
         int played = PlayerPrefs.GetInt("hasPlayed");
+
         if (played > 0)
         {
             this.countText.text = "Last score: " + score.ToString();
+            this.bestScoreText.text = "Best score: " + bestScore.ToString();
         }
         
     }
