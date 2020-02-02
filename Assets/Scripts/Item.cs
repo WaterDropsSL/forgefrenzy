@@ -5,12 +5,15 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     protected Queue<string> stationsLeft;
-    protected GameObject location;
-    public GameObject spawnObject;
+    public GameObject location;
+    public Sprite selectedSprite;
+    public Sprite brokenSprite;
+    public Sprite brokenSelectedSprite;
+    public Sprite repairedSprite;
+    //public GameObject spawnObject;
 
     public Item() {
-        stationsLeft = new Queue<string>();
-        location = spawnObject;
+        this.stationsLeft = new Queue<string>();
     }
 
     public string getNextStation() {
@@ -28,5 +31,16 @@ public class Item : MonoBehaviour
 
     public string nextStation() {
         return stationsLeft.Dequeue();
+    }
+
+    public bool isRepaired() {
+
+        //bool result = 
+        ////print("isRepaired: " + result);
+        return stationsLeft.Count == 0; ;
+    }
+
+    public void setSprite(Sprite newSprite) {
+        GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 }
