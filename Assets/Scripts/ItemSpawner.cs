@@ -9,6 +9,9 @@ public class ItemSpawner : MonoBehaviour
     public Transform spawnLocation;
     public GameObject[] spawnItems;
     public GameObject conveyorBelt;
+    public Sprite[] dialogBubbles;
+    public GameObject dialogBubble;
+
     private float timer = 0.0f;
     private GameObject nextItem;
 
@@ -16,6 +19,7 @@ public class ItemSpawner : MonoBehaviour
     void Start()
     {
         processNextItem();
+        dialogBubble.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -35,17 +39,28 @@ public class ItemSpawner : MonoBehaviour
     private void processNextItem() {
         int randomIndex = Random.Range(0, spawnItems.Length);
         nextItem = spawnItems[randomIndex];
+        dialogBubble.GetComponent<SpriteRenderer>().sprite = dialogBubbles[randomIndex];
+        //Sprite nextSprite = nextItem.GetComponent<SpriteRenderer>().sprite;
+        //dialogBubble.GetComponent<SpriteRenderer>().
 
-        Sprite nextSprite = nextItem.GetComponent<SpriteRenderer>().sprite;
 
+        StartCoroutine(WaitToDisplay(spawnTime * 2 / 3));
+        
     }
 
     void spawnItem(GameObject itemPrefab) {
         print("Spawning item!");
 
-        
         GameObject newItem = Instantiate(itemPrefab, spawnLocation.position, Quaternion.identity);
         conveyorBelt.GetComponent<ConveyorBelt>().insert(newItem);
+        dialogBubble.GetComponent<SpriteRenderer>().enabled = false;
     }
 
+
+
+    IEnumerator WaitToDisplay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        dialogBubble.GetComponent<SpriteRenderer>().enabled = true;
+    }
 }
