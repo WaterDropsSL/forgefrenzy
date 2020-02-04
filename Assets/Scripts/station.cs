@@ -40,7 +40,7 @@ public class Station : MonoBehaviour
                 print("Item finished!");
 
                 emptyStation();
-                resetProgressBar();
+                
             }
             else {
                 int newProgress = Mathf.FloorToInt((1 - processTimeLeft / processTimer) / 0.25f);
@@ -59,8 +59,8 @@ public class Station : MonoBehaviour
     private void processItem(GameObject item) {
         isBlocked = true;
         AudioSource.PlayClipAtPoint(processingSound, transform.position);
-        updateProgressBar(0);
         progressBar.GetComponent<SpriteRenderer>().enabled = true;
+        updateProgressBar(0);
 
         Debug.Log("Station " + gameObject.name + " received item: " + item.name);
         item.GetComponent<Item>().hideItem();
@@ -119,11 +119,13 @@ public class Station : MonoBehaviour
                 conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
             }
         }
+        resetProgressBar();
         item.GetComponent<Item>().unHideItem();
 
         if (capacityBarItems.Count > 0)
         {
             // we start processing next item
+            print("processing an enqueued item...");
             processItem(capacityBarItems.Dequeue());
             updateCapacityBar();
         }
