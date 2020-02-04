@@ -13,7 +13,8 @@ class ItemDragHandler : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (!GetComponent<Item>().isRepaired()) {
+        if (!GetComponent<Item>().isRepaired())
+        {
             GetComponent<Item>().setSprite(GetComponent<Item>().brokenSelectedSprite);
         }
     }

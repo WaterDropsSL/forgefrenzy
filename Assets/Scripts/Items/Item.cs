@@ -36,6 +36,16 @@ public class Item : MonoBehaviour
         return stationsLeft.Dequeue();
     }
 
+    public void repair() {
+
+        // setSprite
+        setSprite(repairedSprite);
+        // if its repaired, disable raycasting
+        gameObject.layer = 2;
+        // TODO: handle every move in ItemManager
+        
+    }
+
     public bool isRepaired() {
 
         //bool result = 

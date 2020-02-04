@@ -10,6 +10,7 @@ public class Station : MonoBehaviour
     private float processTimeLeft = 5.0f;
     private Sprite originalSprite;
     private int currentProgress = 1;
+    private Queue<GameObject> capacityBarItems = new Queue<GameObject>();
 
     public float processTimer = 5.0f;
     public Sprite hintSprite;
@@ -21,13 +22,11 @@ public class Station : MonoBehaviour
     public GameObject scoreManager;
     public Sprite[] capacityBarSprites;
     public GameObject capacityBar;
-    public bool capacityBarEnabled = false;
+    public int maxItemsCapacityBar = 3;
 
     void Start() {
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
-        if (!capacityBarEnabled) {
-            capacityBar.GetComponent<SpriteRenderer>().enabled = false;
-        }
+        capacityBar.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -57,28 +56,42 @@ public class Station : MonoBehaviour
         }
     }
 
+    private void processItem(GameObject item) {
+        isBlocked = true;
+        AudioSource.PlayClipAtPoint(processingSound, transform.position);
+        updateProgressBar(0);
+        progressBar.GetComponent<SpriteRenderer>().enabled = true;
+
+        Debug.Log("Station " + gameObject.name + " received item: " + item.name);
+        item.GetComponent<Item>().hideItem();
+        item.GetComponent<Item>().nextStation(); // update status
+        this.item = item;
+        isProcessing = true;
+        processTimeLeft = processTimer;
+        // play animation
+        // gameObject.GetComponent<Animation>().Play();
+    }
+
+    private void enqueueItem(GameObject item) {
+        Debug.Log("Station " + gameObject.name + " enqueued item: " + item.name);
+        capacityBar.GetComponent<SpriteRenderer>().enabled = true;
+        // we add it to the queue
+        capacityBarItems.Enqueue(item);
+        item.GetComponent<Item>().hideItem();
+        updateCapacityBar();
+    }
+    
+
     public void insert(GameObject item) {
-        if (isBlocked == false) {
-            // si al objeto le toca esta estacion
-
-
-            //Debug.Log("WeaponTag: " + weaponTag);
-            //Debug.Log("StationTag: " + gameObject.name);
-            //if (weaponTag == gameObject.name)
-            //{
-            isBlocked = true;
-            AudioSource.PlayClipAtPoint(processingSound, transform.position);
-            updateProgressBar(0);
-            progressBar.GetComponent<SpriteRenderer>().enabled = true;
-            // play animation
-            Debug.Log("Received item: " + item.name);
-            item.GetComponent<Item>().hideItem();
-            item.GetComponent<Item>().nextStation(); // update status
-            this.item = item;
-            isProcessing = true;
-            processTimeLeft = processTimer;
-            //}
-            // gameObject.GetComponent<Animation>().Play();
+        if (!isBlocked)
+        {
+            processItem(item);
+        }
+        else {
+            // if we have room for more items in the capacity bar
+            if (capacityBarItems.Count < maxItemsCapacityBar) {
+                enqueueItem(item);
+            }
         }
     }
 
@@ -89,7 +102,8 @@ public class Station : MonoBehaviour
         {
             int scorePoints = item.GetComponent<Item>().scorePoints;
             print("Item " + item.name + " has been repaired, got " + scorePoints + " points.");
-            item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
+            //item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
+            item.GetComponent<Item>().repair();
             scoreManager.GetComponent<ScoreManager>().addScore(scorePoints);
             conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
             AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position); 
@@ -106,11 +120,23 @@ public class Station : MonoBehaviour
             }
         }
         item.GetComponent<Item>().unHideItem();
-        isBlocked = false;
+
+        if (capacityBarItems.Count > 0)
+        {
+            // we start processing next item
+            processItem(capacityBarItems.Dequeue());
+            updateCapacityBar();
+        }
+        else {
+            isBlocked = false;
+        }
     }
 
     public bool isAvailable() {
-        return !isBlocked;
+
+        // checkear si está libre, sino devolver si hay hueco en la cola o no
+
+        return !isBlocked || capacityBarItems.Count < maxItemsCapacityBar;
     }
 
     public void hint() {
@@ -126,6 +152,16 @@ public class Station : MonoBehaviour
         print("progress is: " + progress);
         progressBar.GetComponent<SpriteRenderer>().sprite = progressBarSprites[progress];
         currentProgress = progress;
+    }
+
+    private void updateCapacityBar()
+    {
+        if (capacityBarItems.Count == 0) {
+            capacityBar.GetComponent<SpriteRenderer>().enabled = false;
+        } else {
+            capacityBar.GetComponent<SpriteRenderer>().sprite = capacityBarSprites[capacityBarItems.Count - 1];
+        }
+        
     }
 
     private void resetProgressBar() {
