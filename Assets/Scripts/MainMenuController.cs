@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
@@ -10,6 +10,8 @@ public class MainMenuController : MonoBehaviour
     //public AudioClip menuMusic;
     public Text countText;
     public Text bestScoreText;
+    public GameObject levelChanger;
+
     public void Start()
     {
         int score = PlayerPrefs.GetInt("finalScore");
@@ -29,7 +31,7 @@ public class MainMenuController : MonoBehaviour
         bool hasPlayed=true;
         //AudioSource.PlayClipAtPoint(playAudio, transform.position);
         PlayerPrefs.SetInt("hasPlayed", (hasPlayed ? 1 : 0));
-        SceneManager.LoadScene("MainScene");
+        levelChanger.GetComponent<LevelChanger>().fadeToLevel(1);   
     }
 
     public void options()
