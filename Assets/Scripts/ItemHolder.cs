@@ -17,7 +17,7 @@ public class ItemHolder : MonoBehaviour
         item.transform.position = spawnPosition.position;
     }
 
-    public void remove(GameObject item)
+    public virtual void remove(GameObject item)
     {
         print("number of items before removing: " + this.items.Count);
         this.items.Remove(item);

@@ -14,12 +14,12 @@ public class Station : MonoBehaviour
 
     public float processTimer = 5.0f;
     public Sprite hintSprite;
-    public GameObject storageArea;
-    public GameObject conveyorBelt;
+    public StorageArea storageArea;
+    public ConveyorBelt conveyorBelt;
     public AudioClip processingSound;
     public GameObject progressBar;
     public Sprite[] progressBarSprites;
-    public GameObject scoreManager;
+    public ScoreManager scoreManager;
     public Sprite[] capacityBarSprites;
     public GameObject capacityBar;
     public int maxItemsCapacityBar = 3;
@@ -45,7 +45,6 @@ public class Station : MonoBehaviour
             else {
                 int newProgress = Mathf.FloorToInt((1 - processTimeLeft / processTimer) / 0.25f);
                 if (newProgress > currentProgress) {
-                    print("newProgress: " + newProgress);
                     updateProgressBar(newProgress);
                 }
                 
@@ -104,19 +103,19 @@ public class Station : MonoBehaviour
             print("Item " + item.name + " has been repaired, got " + scorePoints + " points.");
             //item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
             item.GetComponent<Item>().repair();
-            scoreManager.GetComponent<ScoreManager>().addScore(scorePoints);
-            conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
+            scoreManager.addScore(scorePoints);
+            conveyorBelt.insert(item);
             AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position); 
         }
         else {
-            if (!storageArea.GetComponent<StorageArea>().isFull())
+            if (!storageArea.isFull())
             {
-                storageArea.GetComponent<StorageArea>().insert(item);
+                storageArea.insert(item);
             }
             else
             {
                 print("Storage full.");
-                conveyorBelt.GetComponent<ConveyorBelt>().insert(item);
+                conveyorBelt.insert(item);
             }
         }
         resetProgressBar();
@@ -135,9 +134,7 @@ public class Station : MonoBehaviour
     }
 
     public bool isAvailable() {
-
         // checkear si está libre, sino devolver si hay hueco en la cola o no
-
         return !isBlocked || capacityBarItems.Count < maxItemsCapacityBar;
     }
 
@@ -151,7 +148,6 @@ public class Station : MonoBehaviour
     }
 
     private void updateProgressBar(int progress) {
-        print("progress is: " + progress);
         progressBar.GetComponent<SpriteRenderer>().sprite = progressBarSprites[progress];
         currentProgress = progress;
     }
@@ -167,7 +163,7 @@ public class Station : MonoBehaviour
     }
 
     private void resetProgressBar() {
-        //progressBar.
+        //progressBar
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
         updateProgressBar(1);
     }

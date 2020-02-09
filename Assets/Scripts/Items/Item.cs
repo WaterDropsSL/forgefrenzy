@@ -14,9 +14,12 @@ public class Item : MonoBehaviour
     public int scorePoints;
     private bool hidden = false;
     //public GameObject spawnObject;
+    public System.Guid id { get; private set; }
+    // Other properties, etc.
 
     public Item() {
         this.stationsLeft = new Queue<string>();
+        this.id = System.Guid.NewGuid();
     }
 
     public string getNextStation() {
@@ -60,6 +63,7 @@ public class Item : MonoBehaviour
     public void hideItem() {
         hidden = true;
         GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         print("item invisible");
     }
 
@@ -67,6 +71,7 @@ public class Item : MonoBehaviour
     {
         hidden = false;
         GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<Collider>().enabled = true;
         print("item visible");
     }
 

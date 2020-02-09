@@ -57,13 +57,13 @@ class ItemDragHandler : MonoBehaviour
         {
             if (hit.transform.tag == "Station")  // check if object we are hovering over is a station
             {
-                Debug.Log("Hit: " + hit.transform.gameObject.name);
+                //Debug.Log("Hit: " + hit.transform.gameObject.name);
 
                 string weaponTag = gameObject.GetComponent<Item>().getNextStation();
-                Debug.Log("next station for weapon is: " + weaponTag);
+                //Debug.Log("next station for weapon is: " + weaponTag);
                 if (hit.collider.gameObject.name == weaponTag)  // check if it is the next station to process
                 {
-                    Debug.Log("hit the next station!");
+                    //Debug.Log("hit the next station!");
                     // if it is, check if the station is available
                     if (hit.collider.gameObject.GetComponent<Station>().isAvailable())
                     {
