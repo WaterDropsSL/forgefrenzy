@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Station : MonoBehaviour
@@ -23,10 +22,12 @@ public class Station : MonoBehaviour
     public Sprite[] capacityBarSprites;
     public GameObject capacityBar;
     public int maxItemsCapacityBar = 3;
+    public GameObject vfx;
 
     void Start() {
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
         capacityBar.GetComponent<SpriteRenderer>().enabled = false;
+        vfx.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -59,6 +60,7 @@ public class Station : MonoBehaviour
         isBlocked = true;
         AudioSource.PlayClipAtPoint(processingSound, transform.position);
         progressBar.GetComponent<SpriteRenderer>().enabled = true;
+        vfx.GetComponent<SpriteRenderer>().enabled = true;
         updateProgressBar(0);
 
         Debug.Log("Station " + gameObject.name + " received item: " + item.name);
@@ -96,7 +98,7 @@ public class Station : MonoBehaviour
 
     void emptyStation() {
 
-        
+        vfx.GetComponent<SpriteRenderer>().enabled = false;
         if (item.GetComponent<Item>().isRepaired())  // send to conveyor belt if item has been repaired
         {
             int scorePoints = item.GetComponent<Item>().scorePoints;
@@ -120,6 +122,7 @@ public class Station : MonoBehaviour
         }
         resetProgressBar();
         item.GetComponent<Item>().unHideItem();
+        
 
         if (capacityBarItems.Count > 0)
         {

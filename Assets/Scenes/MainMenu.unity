@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -120,9 +121,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &213869294 stripped
+--- !u!1 &145131663 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2608380121432825472, guid: 88e05c8e9961cf646bff2619da09b6a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2608380121556150986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145131664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145131663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f81790ba2d3d24dabea46ec559ef19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 213869296}
+--- !u!95 &213869296 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2608380121432825478, guid: 88e05c8e9961cf646bff2619da09b6a7,
     type: 3}
   m_PrefabInstance: {fileID: 2608380121556150986}
   m_PrefabAsset: {fileID: 0}
@@ -306,6 +326,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -362,6 +383,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2608380121302218740, guid: 88e05c8e9961cf646bff2619da09b6a7,
+        type: 3}
+      propertyPath: levelChanger
+      value: 
+      objectReference: {fileID: 145131664}
     - target: {fileID: 2608380121432825472, guid: 88e05c8e9961cf646bff2619da09b6a7,
         type: 3}
       propertyPath: m_Name
@@ -422,10 +448,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2608380121302218740, guid: 88e05c8e9961cf646bff2619da09b6a7,
+    - target: {fileID: 2608380121432825479, guid: 88e05c8e9961cf646bff2619da09b6a7,
         type: 3}
-      propertyPath: levelChanger
+      propertyPath: animator
       value: 
-      objectReference: {fileID: 213869294}
-    m_RemovedComponents: []
+      objectReference: {fileID: 213869296}
+    m_RemovedComponents:
+    - {fileID: 2608380121432825479, guid: 88e05c8e9961cf646bff2619da09b6a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 88e05c8e9961cf646bff2619da09b6a7, type: 3}

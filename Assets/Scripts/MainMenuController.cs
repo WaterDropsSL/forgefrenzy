@@ -10,20 +10,21 @@ public class MainMenuController : MonoBehaviour
     //public AudioClip menuMusic;
     public Text countText;
     public Text bestScoreText;
-    public GameObject levelChanger;
+    public LevelChanger levelChanger;
 
     public void Start()
     {
         int score = PlayerPrefs.GetInt("finalScore");
         int bestScore = PlayerPrefs.GetInt("bestScore");
         int played = PlayerPrefs.GetInt("hasPlayed");
+        
 
         if (played > 0)
         {
             this.countText.text = "Last score: " + score.ToString();
             this.bestScoreText.text = "Best score: " + bestScore.ToString();
         }
-        
+
     }
     public void playGame()
     {
@@ -31,7 +32,7 @@ public class MainMenuController : MonoBehaviour
         bool hasPlayed=true;
         //AudioSource.PlayClipAtPoint(playAudio, transform.position);
         PlayerPrefs.SetInt("hasPlayed", (hasPlayed ? 1 : 0));
-        levelChanger.GetComponent<LevelChanger>().fadeToLevel(1);   
+        levelChanger.fadeToLevel(1);   
     }
 
     public void options()
