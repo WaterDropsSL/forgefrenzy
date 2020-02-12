@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance { get; private set; }
     private int score = 0;
     private int combo = 0;
-    public Text scoreText;
-    public Text comboText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI comboText;
 
     void Awake()
     {
