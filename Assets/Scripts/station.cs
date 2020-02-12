@@ -18,7 +18,6 @@ public class Station : MonoBehaviour
     public AudioClip processingSound;
     public GameObject progressBar;
     public Sprite[] progressBarSprites;
-    public ScoreManager scoreManager;
     public Sprite[] capacityBarSprites;
     public GameObject capacityBar;
     public int maxItemsCapacityBar = 3;
@@ -105,7 +104,7 @@ public class Station : MonoBehaviour
             print("Item " + item.name + " has been repaired, got " + scorePoints + " points.");
             //item.GetComponent<Item>().setSprite(item.GetComponent<Item>().repairedSprite);
             item.GetComponent<Item>().repair();
-            scoreManager.addScore(scorePoints);
+            ScoreManager.instance.addScore(scorePoints);
             conveyorBelt.insert(item);
             AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position); 
         }

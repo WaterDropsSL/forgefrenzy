@@ -79,6 +79,9 @@ public class Item : MonoBehaviour
     {
         if (!hidden) {
             location.GetComponent<ItemHolder>().remove(gameObject);
+            if (!isRepaired()) {
+                ScoreManager.instance.breakCombo();
+            }
             print("Destroying object...");
             Destroy(gameObject);
         }

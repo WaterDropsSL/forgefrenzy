@@ -1,23 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int score;
-
+    public static ScoreManager instance { get; private set; }
+    private int score = 0;
+    private int combo = 0;
     public Text scoreText;
-    // Start is called before the first frame update
-    void Start()
+    public Text comboText;
+
+    void Awake()
     {
-        score = 0;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
         scoreText.text = "SCORE: " + score.ToString();
+        comboText.text = "COMBO: " + combo.ToString() + "x";
     }
 
     public int getScore() {
@@ -25,7 +32,14 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void addScore(int points) {
-        score += points;
-        print("added " + points + " . Total score: " + score);
+        combo += 1;
+        print("Combo: " + combo.ToString());
+        score += points * combo;
+        //print("added " + points + " . Total score: " + score);
     }
+
+    public void breakCombo() {
+        combo = 0;
+    }
+
 }
