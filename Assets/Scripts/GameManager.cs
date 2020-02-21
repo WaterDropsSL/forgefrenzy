@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -37,5 +36,23 @@ public class GameManager : MonoBehaviour
 
     void InitGame() { 
         
+    }
+
+    public void handleGameOver() {
+        print("Gameover!");
+        int score = ScoreManager.instance.getScore();
+        print("FINAL SCORE: " + score);
+        PlayerPrefs.SetInt("finalScore", score);
+
+        string username = PlayerPrefs.GetString("username");
+
+        int bestScore = PlayerPrefs.GetInt("bestScore");
+        if (score > bestScore)
+        {
+            PlayerPrefs.SetInt("bestScore", score);
+        }
+
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        HighScoreManager.AddNewHighscore(username, score);
     }
 }

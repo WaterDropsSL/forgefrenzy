@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     public AudioClip repairedSound;
     public int scorePoints;
     private bool hidden = false;
+    public AudioManager audioManager;
     //public GameObject spawnObject;
     public System.Guid id { get; private set; }
     // Other properties, etc.
@@ -20,6 +21,10 @@ public class Item : MonoBehaviour
     public Item() {
         this.stationsLeft = new Queue<string>();
         this.id = System.Guid.NewGuid();
+    }
+
+    void Awake() {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public string getNextStation() {
@@ -43,16 +48,13 @@ public class Item : MonoBehaviour
 
         // setSprite
         setSprite(repairedSprite);
-        // if its repaired, disable raycasting
-        gameObject.layer = 2;
-        // TODO: handle every move in ItemManager
         
+        gameObject.layer = 2; // if its repaired, disable raycasting
+        // TODO: handle every move in ItemManager
+
     }
 
     public bool isRepaired() {
-
-        //bool result = 
-        ////print("isRepaired: " + result);
         return stationsLeft.Count == 0; ;
     }
 
@@ -81,6 +83,7 @@ public class Item : MonoBehaviour
             location.GetComponent<ItemHolder>().remove(gameObject);
             if (!isRepaired()) {
                 ScoreManager.instance.breakCombo();
+                audioManager.play("breakCombo");
             }
             print("Destroying object...");
             Destroy(gameObject);

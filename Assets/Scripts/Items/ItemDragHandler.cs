@@ -8,9 +8,6 @@ class ItemDragHandler : MonoBehaviour
     private float distance;
     private Vector3 initialPosition;
 
-    public AudioClip pickUpSound;
-    public AudioClip rejectSound;
-
     void OnMouseEnter()
     {
         if (!GetComponent<Item>().isRepaired())
@@ -34,11 +31,11 @@ class ItemDragHandler : MonoBehaviour
             initialPosition = transform.position;
             dragging = true;
 
-            AudioSource.PlayClipAtPoint(pickUpSound, transform.position);
+            gameObject.GetComponent<Item>().audioManager.play("pickupItem");
+            //AudioSource.PlayClipAtPoint(pickUpSound, transform.position);
             GameObject station = getNextStation();
             station.GetComponent<Station>().hint();
         }
-
     }
 
     private GameObject getNextStation() {
@@ -77,7 +74,8 @@ class ItemDragHandler : MonoBehaviour
             }
         }
 
-        AudioSource.PlayClipAtPoint(rejectSound, transform.position);
+        //AudioSource.PlayClipAtPoint(rejectSound, transform.position);
+        gameObject.GetComponent<Item>().audioManager.play("rejectItem");
         transform.position = initialPosition;
 
     }

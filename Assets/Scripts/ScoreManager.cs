@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     private int combo = 0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI comboText;
+    public Animator comboAnimator;
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class ScoreManager : MonoBehaviour
         print("Combo: " + combo.ToString());
         score += points * combo;
         //print("added " + points + " . Total score: " + score);
+        comboAnimator.SetTrigger("ComboChain");
     }
 
     public void breakCombo() {

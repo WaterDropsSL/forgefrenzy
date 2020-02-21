@@ -23,10 +23,13 @@ public class Station : MonoBehaviour
     public int maxItemsCapacityBar = 3;
     public GameObject vfx;
 
+    private AudioManager audioManager;
+
     void Start() {
         progressBar.GetComponent<SpriteRenderer>().enabled = false;
         capacityBar.GetComponent<SpriteRenderer>().enabled = false;
         vfx.GetComponent<SpriteRenderer>().enabled = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -57,7 +60,8 @@ public class Station : MonoBehaviour
 
     private void processItem(GameObject item) {
         isBlocked = true;
-        AudioSource.PlayClipAtPoint(processingSound, transform.position);
+        //AudioSource.PlayClipAtPoint(processingSound, transform.position);
+        audioManager.play(gameObject.name);
         progressBar.GetComponent<SpriteRenderer>().enabled = true;
         vfx.GetComponent<SpriteRenderer>().enabled = true;
         updateProgressBar(0);
@@ -106,7 +110,8 @@ public class Station : MonoBehaviour
             item.GetComponent<Item>().repair();
             ScoreManager.instance.addScore(scorePoints);
             conveyorBelt.insert(item);
-            AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position); 
+            audioManager.play("itemRepaired");
+            //AudioSource.PlayClipAtPoint(item.GetComponent<Item>().repairedSound, transform.position);
         }
         else {
             if (!storageArea.isFull())
